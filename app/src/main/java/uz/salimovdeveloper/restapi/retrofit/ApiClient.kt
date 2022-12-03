@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    const val BASE_URL = "hvax.pythonanywhere.com/"
+    const val BASE_URL = "https://hvax.pythonanywhere.com/"
 
     fun getRetrofit(): Retrofit{
         return Retrofit.Builder()

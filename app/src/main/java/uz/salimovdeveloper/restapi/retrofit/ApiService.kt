@@ -5,6 +5,6 @@ import uz.salimovdeveloper.restapi.models.MyTodo
 
 interface ApiService {
 
-    @GET
+    @GET("plan")
     suspend fun getAllTodo():List<MyTodo>
 }
