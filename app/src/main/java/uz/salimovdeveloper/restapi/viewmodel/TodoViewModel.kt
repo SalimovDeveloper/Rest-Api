@@ -11,6 +11,7 @@ import uz.salimovdeveloper.restapi.models.MyTodoRequest
 import uz.salimovdeveloper.restapi.models.MyTodoResponse
 import uz.salimovdeveloper.restapi.retrofit.ApiClient
 import uz.salimovdeveloper.restapi.utils.Resource
+import uz.salimovdeveloper.restapi.utils.Status
 
 class TodoViewModel : ViewModel() {
     private val liveData = MutableLiveData<Resource<List<MyTodo>>>()
@@ -41,14 +42,21 @@ class TodoViewModel : ViewModel() {
     private var postLiveData = MutableLiveData<Resource<MyTodoResponse>>()
     fun addMyTodo(myTodoRequest: MyTodoRequest) {
         viewModelScope.launch {
+            postLiveData.postValue(Resource.loading("Loading post"))
             try {
 
                 coroutineScope {
-                    apiService.addTodo(myTodoRequest)
+                    val response = async {
+
+                        apiService.addTodo(myTodoRequest)
+
+                    }.await()
+                    postLiveData.postValue(Resource.success(response))
                     getAllTodo()
                 }
 
             } catch (e: Exception) {
+                postLiveData.postValue(Resource.error(e.message))
 
             }
         }
