@@ -7,14 +7,16 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import uz.salimovdeveloper.restapi.models.MyTodo
+import uz.salimovdeveloper.restapi.models.MyTodoRequest
+import uz.salimovdeveloper.restapi.models.MyTodoResponse
 import uz.salimovdeveloper.restapi.retrofit.ApiClient
 import uz.salimovdeveloper.restapi.utils.Resource
 
 class TodoViewModel : ViewModel() {
     private val liveData = MutableLiveData<Resource<List<MyTodo>>>()
-
+    private val apiService = ApiClient.getApiService()
     fun getAllTodo(): MutableLiveData<Resource<List<MyTodo>>> {
-        val apiService = ApiClient.getApiService()
+
         viewModelScope.launch {
             liveData.postValue(Resource.loading("loading"))
             try {
@@ -34,5 +36,21 @@ class TodoViewModel : ViewModel() {
             }
         }
         return liveData
+    }
+
+    private var postLiveData = MutableLiveData<Resource<MyTodoResponse>>()
+    fun addMyTodo(myTodoRequest: MyTodoRequest) {
+        viewModelScope.launch {
+            try {
+
+                coroutineScope {
+                    apiService.addTodo(myTodoRequest)
+                    getAllTodo()
+                }
+
+            } catch (e: Exception) {
+
+            }
+        }
     }
 }

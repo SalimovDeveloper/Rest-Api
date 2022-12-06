@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:padding="20dp"
+<LinearLayout android:padding="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditText
         android:id="@+id/edt_title"
@@ -12,30 +12,45 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:hint="@string/title"
+        android:maxLength="30"
         />
 
     <EditText
-        android:id="@+id/edt_title"
+        android:id="@+id/edt_matn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:hint="@string/title"
+        android:hint="@string/about"
+        android:maxLength="30"
         />
 
     <EditText
-        android:id="@+id/edt_title"
+        android:id="@+id/edt_deadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:hint="@string/title"
+        android:hint="@string/deadline"
+        android:maxLength="30"
         />
 
-    <EditText
-        android:id="@+id/edt_title"
+    <Spinner
+        android:id="@+id/spinner_xolat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:entries="@array/my_status"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
         android:textSize="25sp"
-        android:hint="@string/title"
+        android:textAllCaps="false"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        app:cornerRadius="15dp"
         />
 
 </LinearLayout>

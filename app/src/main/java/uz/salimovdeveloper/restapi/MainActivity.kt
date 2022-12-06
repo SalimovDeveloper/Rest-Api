@@ -1,5 +1,6 @@
 package uz.salimovdeveloper.restapi
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import uz.salimovdeveloper.restapi.adapters.RvAdapter
 import uz.salimovdeveloper.restapi.databinding.ActivityMainBinding
+import uz.salimovdeveloper.restapi.databinding.ItemDialogBinding
+import uz.salimovdeveloper.restapi.models.MyTodoRequest
 import uz.salimovdeveloper.restapi.utils.Status
 import uz.salimovdeveloper.restapi.viewmodel.TodoViewModel
 
@@ -43,5 +46,26 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        binding.btnAdd.setOnClickListener {
+            val dialog = AlertDialog.Builder(this).create()
+            val itemDialogBinding = ItemDialogBinding.inflate(layoutInflater)
+            dialog.setView(itemDialogBinding.root)
+
+            itemDialogBinding.apply {
+                btnSave.setOnClickListener {
+                    val myTodoRequest = MyTodoRequest(
+                        spinnerXolat.selectedItem.toString(),
+                        edtMatn.text.toString().trim(),
+                        edtDeadline.text.toString().trim(),
+                        edtTitle.text.toString().trim()
+                    )
+                    todoViewModel.addMyTodo(myTodoRequest)
+                    dialog.cancel()
+                }
+
+            }
+
+            dialog.show()
+        }
     }
 }

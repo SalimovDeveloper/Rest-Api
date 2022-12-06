@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Rest Api</string>
     <string name="title">Title</string>
+    <string name="about">About</string>
+    <string name="deadline">Deadline</string>
+    <string name="save">Save</string>
 </resources>
